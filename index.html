@@ -1,0 +1,106 @@
+<style>
+    body{
+        margin: 0; 
+        background-color: black;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+</style>
+<canvas id = "homecanvas"></canvas>
+
+<script>
+        var canvas = document.getElementById("homecanvas");
+        var ctx = canvas.getContext("2d");
+        canvas.width = 1024
+        canvas.height = 576
+        ctx.fillStyle='black';
+        ctx.fillRect(0,0,canvas.width,canvas.height);
+        
+ 
+        base_image = new Image();
+        base_image.src = "./img/homepage.png";
+        base_image.onload = function(){
+            ctx.drawImage(base_image, -1,-1, canvas.width, canvas.height);
+        }
+        
+
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';    
+
+     
+
+    //button on canvas
+        const path = new Path2D()
+        path.rect(188, 335.5, 172, 37)
+        path.closePath()
+    
+    
+        ctx.fillStyle = "white"
+        ctx.fill(path)
+        ctx.lineWidth = 2
+        ctx.strokeStyle = "#000000"
+        ctx.stroke(path)
+
+        const path2 = new Path2D()
+        path2.rect(424, 335.5, 172, 37)
+        path2.closePath()
+    
+        ctx.fillStyle = "white"
+        ctx.fill(path2)
+        ctx.lineWidth = 2
+        ctx.strokeStyle = "black"
+        ctx.stroke(path2)
+
+        const path3 = new Path2D()
+        path3.rect(659, 335.5, 172, 37)
+        path3.closePath()
+    
+        ctx.fillStyle = "white"
+        ctx.fill(path3)
+        ctx.lineWidth = 2
+        ctx.strokeStyle = "black"
+        ctx.stroke(path3)
+
+       
+      
+
+
+        function getXY(canvas, event){ 
+        const rect = canvas.getBoundingClientRect()
+        const y = event.clientY - rect.top
+        const x = event.clientX - rect.left
+        console.log("x: " + x)
+        console.log("y: " + y)
+        return {x:x, y:y}
+        }
+
+
+        document.addEventListener("click",  function (e) {
+        const XY = getXY(canvas, e)
+        if(ctx.isPointInPath(path, XY.x, XY.y)) {
+            // Do Something with the click
+            setTimeout(() =>{location.replace("./level1.html");},500);
+        }
+        }, false)
+
+        
+        document.addEventListener("click",  function (e) {
+        const XY = getXY(canvas, e)
+        if(ctx.isPointInPath(path2, XY.x, XY.y)) {
+            // Do Something with the click
+            setTimeout(() =>{location.replace("./level2.html");},500);
+        }
+        }, false)
+
+        document.addEventListener("click",  function (e) {
+        const XY = getXY(canvas, e)
+        if(ctx.isPointInPath(path3, XY.x, XY.y)) {
+            // Do Something with the click
+            setTimeout(() =>{location.replace("./level3.html");},500);
+        }
+        }, false)
+
+
+</script>
